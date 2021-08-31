@@ -1,3 +1,5 @@
+**NOTE: This README is just a bunch of boilerplate and not actually relevant to the project. This will be updated soon.**
+
 <!--
 👋 Hello! As Nova users browse the extensions library, a good README can help them understand what your extension does, how it works, and what setup or configuration it may require.
 
