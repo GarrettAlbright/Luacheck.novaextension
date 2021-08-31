@@ -1,17 +1,17 @@
 {
-    "identifier": "org.Luacheck",
+    "identifier": "pro.albright.luacheck",
     "name": "Luacheck",
-    "organization": "MyOrganization",
-    "description": "Lorem ipsum, dolor sit amet.",
-    "version": "1.0",
+    "organization": "Garrett Albright",
+    "description": "Integrates the Luacheck linter for Lua into Nova.",
+    "version": "0.1.0",
     "categories": ["issues"],
-    
+
     "main": "main.js",
-    
+
     "activationEvents": [
-        "onLanguage:html"
+        "onLanguage:lua"
     ],
-    
+
     "entitlements": {
         "process": true
     }
