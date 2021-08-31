@@ -10,7 +10,10 @@ exports.deactivate = function() {
 
 
 class IssuesProvider {
-    // /Users/albright/Code/lovetest/main.lua:34:3-4: (E011) expected expression near 'if'
+    // Will match warning or error notification with "--codes" and "--ranges"
+    // flags active (as well as "--no-color" to ensure color codes don't
+    // muck things up). Resulting lines look like this, after trimming:
+    // /Volumes/Macintosh HD/Users/albright/Code/lovetest/main.lua:34:3-4: (E011) expected expression near 'if'
     lineMatchPattern = /^.+?:(\d+):(\d+)-(\d+): \((([WE])\d+)\) (.+)$/;
 
     constructor() {
@@ -18,6 +21,16 @@ class IssuesProvider {
     }
 
     provideIssues(editor) {
+        console.log("in provideIssues");
+
+        // provideIssues() seems to sometimes be called before a document is
+        // ready to read. Bail out early if so.
+        const docLen = editor.document.length;
+        if (docLen === 0) {
+            console.log("Bailing out early as document length is 0");
+            return [];
+        }
+
         // Defeat a scope issue later
         const lineMatchPattern = this.lineMatchPattern;
 
@@ -25,43 +38,51 @@ class IssuesProvider {
             let issues = [];
 
             let processOptions =  {
-                args: ["luacheck", "--no-color", "--codes", "--ranges"],
+                args: ["luacheck", "--no-color", "--codes", "--ranges"]
             };
 
-            // Is the current document unsaved? editor.document.path will not be a
-            // string if so.
-            const filePath = editor.document.path;
-            const hasPath = typeof filePath === "string";
-
             // If the file is local and has been saved, set some more options
-            // relating to its path.
-            if (!editor.document.isRemote && hasPath) {
-                // Set cwd to parent directory of the file. This allows luacheck
-                // to check for configuration files in its ordinary way.
-                const cwd = filePath.split("/").slice(0, -1).join("/");
+            // relating to its path. Document path will be a string if the
+            // document has been saved; "this may be `null` or `undefined`"
+            // otherwise.
+            if (!editor.document.isRemote && typeof editor.document.path === "string") {
+                // Set cwd to parent directory of the file. This allows
+                // luacheck to check for configuration files in its ordinary
+                // way.
+                const cwd = editor.document.path.split("/").slice(0, -1).join("/");
                 processOptions.cwd = cwd;
 
                 // Add the filename to the process options
                 processOptions.args.push("--filename");
-                processOptions.args.push(filePath)
+                processOptions.args.push(editor.document.path)
             }
 
-            // Get text
-            const fullRange = new Range(0, editor.document.length);
-            const text = editor.document.getTextInRange(fullRange);
+            // Hyphen argument tells luacheck to read input from stdin
             processOptions.args.push("-");
 
             // Initialize process
-            console.log(processOptions.args.join(" "));
             const process = new Process("/usr/bin/env", processOptions);
 
             // Collect and process error/warning lines
             process.onStdout(function(line) {
-                const matches = line.trim().match(lineMatchPattern);
-                if (matches === null) {
+                // Line will include spaces at front for formatting and,
+                // annoyingly, a line break at the end. Get rid of that stuff
+                line = line.trim();
+
+                // Some lines are blank for human-friendly formatting
+                // reasons; bail out now if so
+                if (line === "") {
                     return;
                 }
-                console.log(lineMatchPattern);
+                console.log("in onStdout with line: '" + line + "'");
+
+                const matches = line.match(lineMatchPattern);
+                if (matches === null) {
+                    // The first and last lines have human-friendly stats/info
+                    // which won't match the pattern. That's probably the case
+                    // here.
+                    return;
+                }
 
                 let issue = new Issue();
                 issue.code = matches[4];
@@ -74,15 +95,15 @@ class IssuesProvider {
                 // Nova seems to want endColumn to be the first "good"
                 // column rather than the last bad one.
                 issue.endColumn = Number(matches[3]) + 1;
-                console.log(matches.join(" "));
                 issues.push(issue);
             });
 
             process.onStderr(function(line) {
-                console.error("Stderr line from Luacheck", line);
+                console.warn("Stderr line from Luacheck", line);
             });
 
             process.onDidExit(function(exitStatus) {
+                console.log("in onDidExit; status: " + exitStatus)
                 // Note: Luacheck has exit status 2 if it reported errors
                 // and 1 if it reported warnings. 0 if neither were found.
                 // Thus exitStatus 1 and 2 are both "normal."
@@ -98,6 +119,10 @@ class IssuesProvider {
             // https://devforum.nova.app/t/formating-code-with-a-cli-tool/1089
             const writer = process.stdin.getWriter();
             writer.ready.then(function() {
+                // Get text
+                const fullRange = new Range(0, docLen);
+                const text = editor.document.getTextInRange(fullRange);
+                console.log("in writer.ready callback; doc length: " + text.length);
                 writer.write(text);
                 writer.close();
             });
