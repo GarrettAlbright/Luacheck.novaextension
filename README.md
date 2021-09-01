@@ -12,7 +12,7 @@ Next, install this extension. Inside Nova, select "Extension Library…" from th
 
 ## Configuration
 
-This extension doesn't have any configuration options itself, but you might be interested in creating a ".luacheckrc" configuration file for your projects. The file itself should be written in Lua. Of particular interest is the `std` value which can be set to one of several standards which, for example, can stop globals defined by certain frameworks from being flagged by Luacheck. For example, for the LÖVE game framework, use `std="luajit+love"` to stop Luacheck from throwing warnings about accessing the `love` global from your code. See the "[Configuration file](https://luacheck.readthedocs.io/en/stable/config.html)" and "[Command line options](https://luacheck.readthedocs.io/en/stable/cli.html#command-line-options)" sections of [Luacheck's documentation](https://luacheck.readthedocs.io/en/stable/index.html) for more information.
+This extension doesn't have any configuration options itself, but you might be interested in creating a ".luacheckrc" configuration file for your projects. The file itself should be written in Lua. Of particular interest is the `std` value which can be set to specify one or more standards which, for example, can stop globals defined by certain frameworks from being flagged by Luacheck. For example, for the LÖVE game framework, use `std="luajit+love"` to stop Luacheck from throwing warnings about accessing the `love` global from your code. See the "[Configuration file](https://luacheck.readthedocs.io/en/stable/config.html)" and "[Command line options](https://luacheck.readthedocs.io/en/stable/cli.html#command-line-options)" sections of [Luacheck's documentation](https://luacheck.readthedocs.io/en/stable/index.html) for more information.
 
 ## Troubleshooting
 
@@ -23,7 +23,11 @@ If you're not seeing any errors or warnings in the editor even when you're sure 
 - Ensure Nova thinks the file you're editing is to be interpreted as Lua. This may not happen if it has a non-standard or no extension (eg, something other than ".lua"). In Nova, open the "Editor" menu, then check that "Lua" is selected from the "Syntax" submenu.
 - If you're using a ".luacheckrc" configuration file, check that its rules are not causing your file, or the errors/warnings you are expecting to see in your file, are not being excluded.
 
-## TODO/missing features
+## TODO & missing features
 
 - Per-project paths to Luacheck
 - i18n-able error messages?
+
+## License
+
+This project is open source under the 2-clause BSD license. See the [LICENSE](LICENSE) file for the full text of the license.
