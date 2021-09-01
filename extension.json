@@ -14,5 +14,11 @@
 
     "entitlements": {
         "process": true
-    }
+    },
+
+    "license": "BSD 2-clause",
+
+    "bugs": "https://github.com/GarrettAlbright/Luacheck.novaextension/issues",
+    "homepage": "https://github.com/GarrettAlbright/Luacheck.novaextension",
+    "repository": "https://github.com/GarrettAlbright/Luacheck.novaextension"
 }
