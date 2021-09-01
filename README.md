@@ -28,6 +28,8 @@ If you're not seeing any errors or warnings in the editor even when you're sure 
 - Per-project paths to Luacheck
 - i18n-able error messages?
 
-## License
+## License & legal matters
 
 This project is open source under the 2-clause BSD license. See the [LICENSE](LICENSE) file for the full text of the license.
+
+The [Lua logo](http://www.lua.org/images/) was created by Alexandre Nakonechnyj. Copyright © 1998 Lua.org.
