@@ -1,55 +1,29 @@
-**NOTE: This README is just a bunch of boilerplate and not actually relevant to the project. This will be updated soon.**
+# Luacheck for Nova
 
-<!--
-👋 Hello! As Nova users browse the extensions library, a good README can help them understand what your extension does, how it works, and what setup or configuration it may require.
+This is an extension for the [Nova](https://nova.app) code editor which integrates the [Luacheck](https://github.com/mpeterv/luacheck) analyzer and linter for Lua code and shows its warnings and errors directly in Nova.
 
-Not every extension will need every item described below. Use your best judgement when deciding which parts to keep to provide the best experience for your new users.
+![A screenshot of Luacheck for Nova in action](Images/luacheck-screenshot.png)
 
-💡 Quick Tip! As you edit this README template, you can preview your changes by selecting **Extensions → Activate Project as Extension**, opening the Extension Library, and selecting "Luacheck" in the sidebar.
+## Installation
 
-Let's get started!
--->
+First, install [Luacheck](https://github.com/mpeterv/luacheck), if you haven't already. It's recommended that you install a version which corresponds to the version of Lua used in your project (it may be possible to specify a particular instance/version of Luacheck to use on a per-project basis in the future but that is not currently supported). Luacheck can be installed with MacPorts or with Luarocks directly. This extension will try to find Luacheck in the normal search paths configured for your user, so make sure the path to Luacheck is in your `$PATH` such that opening up a new shell and typing `luacheck` gets you something other than a "command not found" error.
 
-<!--
-🎈 Include a brief description of the features your extension provides. For example:
--->
+Next, install this extension. Inside Nova, select "Extension Library…" from the "Extensions" menu and search for "Luacheck." Click the "Install" button when this extension appears.
 
-**Luacheck** automatically lints all open files, then reports errors and warnings in Nova's **Issues** sidebar and the editor gutter:
+## Configuration
 
-<!--
-🎈 It can also be helpful to include a screenshot or GIF showing your extension in action:
--->
+This extension doesn't have any configuration options itself, but you might be interested in creating a ".luacheckrc" configuration file for your projects. The file itself should be written in Lua. Of particular interest is the `std` value which can be set to one of several standards which, for example, can stop globals defined by certain frameworks from being flagged by Luacheck. For example, for the LÖVE game framework, use `std="luajit+love"` to stop Luacheck from throwing warnings about accessing the `love` global from your code. See the "[Configuration file](https://luacheck.readthedocs.io/en/stable/config.html)" and "[Command line options](https://luacheck.readthedocs.io/en/stable/cli.html#command-line-options)" sections of [Luacheck's documentation](https://luacheck.readthedocs.io/en/stable/index.html) for more information.
 
-![](https://nova.app/images/en/dark/editor.png)
+## Troubleshooting
 
-## Requirements
+If you're not seeing any errors or warnings in the editor even when you're sure your code contains some, check the following.
 
-<!--
-🎈 If your extension depends on external processes or tools that users will need to have, it's helpful to list those and provide links to their installers:
--->
+- Ensure this extension is installed and enabled. Inside Nova, select "Extension Library…" from the "Extensions" menu. If you don't see "Luacheck" in the list on the left under "Installed Extensions," the extension is not installed; see the "Installation" section above. If it is installed, check that the check box in that list is checked; if not, the extension is installed, but not enabled.
+- Ensure Luacheck has been installed in such a way that the extension can find it. If you can go into a shell and type `luacheck` and get something other than a "command not found" error, then this extension should work. Otherwise, confirm that you've installed Luacheck and that the path to it is in your `$PATH`.
+- Ensure Nova thinks the file you're editing is to be interpreted as Lua. This may not happen if it has a non-standard or no extension (eg, something other than ".lua"). In Nova, open the "Editor" menu, then check that "Lua" is selected from the "Syntax" submenu.
+- If you're using a ".luacheckrc" configuration file, check that its rules are not causing your file, or the errors/warnings you are expecting to see in your file, are not being excluded.
 
-Luacheck requires some additional tools to be installed on your Mac:
+## TODO/missing features
 
-- [Node.js 8.2.0](https://nodejs.org) and NPM 5.2.0 or newer
-
-<!--
-✨ Providing tips, tricks, or other guides for installing or configuring external dependencies can go a long way toward helping your users have a good setup experience:
--->
-
-> To install the current stable version of Node, click the "Recommended for Most Users" button to begin the download. When that completes, double-click the **.pkg** installer to begin installation.
-
-### Configuration
-
-<!--
-🎈 If your extension offers global- or workspace-scoped preferences, consider pointing users toward those settings. For example:
--->
-
-To configure global preferences, open **Extensions → Extension Library...** then select Luacheck's **Preferences** tab.
-
-You can also configure preferences on a per-project basis in **Project → Project Settings...**
-
-<!--
-👋 That's it! Happy developing!
-
-P.S. If you'd like, you can remove these comments before submitting your extension 😉
--->
+- Per-project paths to Luacheck
+- i18n-able error messages?
