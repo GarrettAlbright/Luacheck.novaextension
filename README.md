@@ -2,7 +2,7 @@
 
 This is an extension for the [Nova](https://nova.app) code editor which integrates the [Luacheck](https://github.com/mpeterv/luacheck) analyzer and linter for Lua code and shows its warnings and errors directly in Nova.
 
-![A screenshot of Luacheck for Nova in action](Images/luacheck-screenshot.png)
+![A screenshot of Luacheck for Nova in action](https://raw.githubusercontent.com/GarrettAlbright/Luacheck.novaextension/master/Images/luacheck-screenshot.png)
 
 ## Installation
 
@@ -30,6 +30,6 @@ If you're not seeing any errors or warnings in the editor even when you're sure 
 
 ## License & legal matters
 
-This project is open source under the 2-clause BSD license. See the [LICENSE](LICENSE) file for the full text of the license.
+This project is open source under the 2-clause BSD license. See the LICENSE file for the full text of the license.
 
 The [Lua logo](http://www.lua.org/images/) was created by Alexandre Nakonechnyj. Copyright © 1998 Lua.org.
