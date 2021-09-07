@@ -16,8 +16,9 @@ This extension doesn't have any configuration options itself, but you might be i
 
 ## Troubleshooting
 
-If you're not seeing any errors or warnings in the editor even when you're sure your code contains some, check the following.
+If you're not seeing any errors or warnings in the editor even when you're sure you should see some, check the following.
 
+- Make sure you are using the most recent version of Nova. The API for Nova extensions is not very stable and since it doesn't seem to be possible to easily download older versions of Nova, I can only realistically guarantee compatibility with the "current" version of Nova. As I write this, the extension is known to work with Nova 7.4. To check what version of Nova you have and if any updates are available, select "About Nova…" from the "Nova" menu and click the "Check for Updates" button. (If you're sure you're using the most recent version of Nova and things still seem broken, please [create an issue](https://github.com/GarrettAlbright/Luacheck.novaextension/issues) or even a pull request if you're a legend.)
 - Ensure this extension is installed and enabled. Inside Nova, select "Extension Library…" from the "Extensions" menu. If you don't see "Luacheck" in the list on the left under "Installed Extensions," the extension is not installed; see the "Installation" section above. If it is installed, check that the check box in that list is checked; if not, the extension is installed, but not enabled.
 - Ensure Luacheck has been installed in such a way that the extension can find it. If you can go into a shell and type `luacheck` and get something other than a "command not found" error, then this extension should work. Otherwise, confirm that you've installed Luacheck and that the path to it is in your `$PATH`.
 - Ensure Nova thinks the file you're editing is to be interpreted as Lua. This may not happen if it has a non-standard or no extension (eg, something other than ".lua"). In Nova, open the "Editor" menu, then check that "Lua" is selected from the "Syntax" submenu.
