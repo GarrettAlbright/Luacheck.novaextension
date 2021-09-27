@@ -103,11 +103,21 @@ class IssuesProvider {
             });
 
             process.onDidExit(function(exitStatus) {
-                console.log("in onDidExit; status: " + exitStatus)
+                // Status 127 most likely means `luacheck` is not installed or
+                // can't be found in $PATH.
+                if (exitStatus == 127) {
+                    // Create an "issue" reporting this.
+                    let issue = new Issue();
+                    issue.message = "Luacheck utility not found; see Luacheck Nova extension documentation";
+                    issue.severity = IssueSeverity.Error;
+                    issue.line = 1;
+                    issues.push(issue);
+                    resolve(issues);
+                }
                 // Note: Luacheck has exit status 2 if it reported errors
                 // and 1 if it reported warnings. 0 if neither were found.
                 // Thus exitStatus 1 and 2 are both "normal."
-                if (exitStatus < 0 || exitStatus > 2) {
+                else if (exitStatus < 0 || exitStatus > 2) {
                     reject();
                 }
                 else {
