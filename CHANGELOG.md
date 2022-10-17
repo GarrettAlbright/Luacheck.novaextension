@@ -10,3 +10,4 @@ Initial release
 ## Version 0.3.0
 
 - Added a global option to turn on/off debug messages to the extension console.
+- Added a project option to run luacheck from the project's folder and not the Lua file's.

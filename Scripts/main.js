@@ -48,11 +48,19 @@ class IssuesProvider {
             // document has been saved; "this may be `null` or `undefined`"
             // otherwise.
             if (!editor.document.isRemote && typeof editor.document.path === "string") {
-                // Set cwd to parent directory of the file. This allows
-                // luacheck to check for configuration files in its ordinary
-                // way.
-                const cwd = editor.document.path.split("/").slice(0, -1).join("/");
-                processOptions.cwd = cwd;
+                let runFromProjectFolder = nova.workspace.config.get("pro.albright.luacheck.run-from-project-folder");
+                if (runFromProjectFolder == true) {
+                    // Set cwd to the project folder. This allows luacheck to
+                    // use one main config file for the entire project.
+                    processOptions.cwd = nova.workspace.path;
+                }
+                else {
+                    // Set cwd to parent directory of the file. This allows
+                    // luacheck to check for configuration files in its ordinary
+                    // way.
+                    const cwd = editor.document.path.split("/").slice(0, -1).join("/");
+                    processOptions.cwd = cwd;
+                }
 
                 // Add the filename to the process options
                 processOptions.args.push("--filename");

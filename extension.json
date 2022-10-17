@@ -37,4 +37,19 @@
         }]
       }
     ],
+    "config-workspace": [
+    {
+        "key": "pro.albright.luacheck.general.workspace.section",
+        "title": "General",
+        "type": "section",
+        "children": [
+          {
+            "key": "pro.albright.luacheck.run-from-project-folder",
+            "title": "Run Luacheck from the project's folder.",
+            "description": "By default Luacheck is run from the Lua file's folder.",
+            "type": "boolean",
+            "default": false
+        }]
+      }
+    ],
 }
