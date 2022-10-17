@@ -1,4 +1,3 @@
-
 exports.activate = function() {
     // Do work when the extension is activated
     console.info("Luacheck extension for Nova activated.");
@@ -8,7 +7,6 @@ exports.deactivate = function() {
     // Clean up state before the extension is deactivated
 }
 
-
 class IssuesProvider {
     // Will match warning or error notification with "--codes" and "--ranges"
     // flags active (as well as "--no-color" to ensure color codes don't
@@ -17,7 +15,6 @@ class IssuesProvider {
     lineMatchPattern = /^.+?:(\d+):(\d+)-(\d+): \((([WE])\d+)\) (.+)$/;
 
     constructor() {
-
     }
 
     provideIssues(editor) {
