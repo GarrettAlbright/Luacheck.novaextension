@@ -3,7 +3,7 @@
     "name": "Luacheck",
     "organization": "Garrett Albright",
     "description": "Integrates the Luacheck linter for Lua into Nova.",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "categories": ["issues"],
 
     "main": "main.js",
@@ -20,5 +20,21 @@
 
     "bugs": "https://github.com/GarrettAlbright/Luacheck.novaextension/issues",
     "homepage": "https://github.com/GarrettAlbright/Luacheck.novaextension",
-    "repository": "https://github.com/GarrettAlbright/Luacheck.novaextension"
+    "repository": "https://github.com/GarrettAlbright/Luacheck.novaextension",
+
+    "config": [
+    {
+        "key": "pro.albright.luacheck.general.section",
+        "title": "General",
+        "type": "section",
+        "children": [
+          {
+            "key": "pro.albright.luacheck.enable-debug-log",
+            "title": "Enable debug log.",
+            "description": "Log some debug info to the extension console.",
+            "type": "boolean",
+            "default": false
+        }]
+      }
+    ],
 }
