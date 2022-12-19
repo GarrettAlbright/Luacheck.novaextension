@@ -20,5 +20,21 @@
 
     "bugs": "https://github.com/GarrettAlbright/Luacheck.novaextension/issues",
     "homepage": "https://github.com/GarrettAlbright/Luacheck.novaextension",
-    "repository": "https://github.com/GarrettAlbright/Luacheck.novaextension"
+    "repository": "https://github.com/GarrettAlbright/Luacheck.novaextension",
+
+    "config": [
+    {
+        "key": "pro.albright.luacheck.general.section",
+        "title": "General",
+        "type": "section",
+        "children": [
+          {
+            "key": "pro.albright.luacheck.disable-debug-log",
+            "title": "Disable debug log.",
+            "description": "Disable logging of any debuggint info to the extension console.",
+            "type": "boolean",
+            "default": false
+        }]
+      }
+    ],
 }

@@ -12,7 +12,9 @@ Next, install this extension. Inside Nova, select "Extension Library…" from th
 
 ## Configuration
 
-This extension doesn't have any configuration options itself, but you might be interested in creating a ".luacheckrc" configuration file for your projects. The file itself should be written in Lua. Of particular interest is the `std` value which can be set to specify one or more standards which, for example, can stop globals defined by certain frameworks from being flagged by Luacheck. For example, for the LÖVE game framework, use `std="luajit+love"` to stop Luacheck from throwing warnings about accessing the `love` global from your code. See the "[Configuration file](https://luacheck.readthedocs.io/en/stable/config.html)" and "[Command line options](https://luacheck.readthedocs.io/en/stable/cli.html#command-line-options)" sections of [Luacheck's documentation](https://luacheck.readthedocs.io/en/stable/index.html) for more information.
+This extension doesn't have many configuration options itself, but you might be interested in creating a ".luacheckrc" configuration file for your projects. The file itself should be written in Lua. Of particular interest is the `std` value which can be set to specify one or more standards which, for example, can stop globals defined by certain frameworks from being flagged by Luacheck. For example, for the LÖVE game framework, use `std="luajit+love"` to stop Luacheck from throwing warnings about accessing the `love` global from your code. See the "[Configuration file](https://luacheck.readthedocs.io/en/stable/config.html)" and "[Command line options](https://luacheck.readthedocs.io/en/stable/cli.html#command-line-options)" sections of [Luacheck's documentation](https://luacheck.readthedocs.io/en/stable/index.html) for more information.
+
+You can turn off logging of debug messages to the extension console in the extension's preferences in Nova.
 
 ## Troubleshooting
 
