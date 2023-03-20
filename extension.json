@@ -23,18 +23,19 @@
     "repository": "https://github.com/GarrettAlbright/Luacheck.novaextension",
 
     "config-workspace": [
-    {
-        "key": "pro.albright.luacheck.general.workspace.section",
-        "title": "General",
-        "type": "section",
-        "children": [
-          {
-            "key": "pro.albright.luacheck.run-from-file-folder",
-            "title": "Run Luacheck from the source file's folder.",
-            "description": "By default Luacheck is run from the project folder.",
-            "type": "boolean",
-            "default": false
-        }]
-      }
+        {
+            "key": "pro.albright.luacheck.general.workspace.section",
+            "title": "General",
+            "type": "section",
+            "children": [
+                {
+                    "key": "pro.albright.luacheck.run-from-file-folder",
+                    "title": "Run Luacheck from the source file's folder",
+                    "description": "By default Luacheck is run from the project folder.",
+                    "type": "boolean",
+                    "default": false
+                }
+            ]
+        }
     ]
 }
