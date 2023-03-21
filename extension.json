@@ -37,5 +37,22 @@
                 }
             ]
         }
-    ]
+    ],
+
+    "config": [
+        {
+            "key": "pro.albright.luacheck.general.section",
+            "title": "General",
+            "type": "section",
+            "children": [
+                {
+                    "key": "pro.albright.luacheck.disable-debug-log",
+                    "title": "Disable debug log",
+                    "description": "Disable logging of any debugging info to the extension console.",
+                    "type": "boolean",
+                    "default": false
+                }
+            ]
+         }
+     ]
 }

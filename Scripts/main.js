@@ -21,13 +21,18 @@ class IssuesProvider {
     }
 
     provideIssues(editor) {
-        console.log("in provideIssues");
+        let disableDebugLog = nova.config.get("pro.albright.luacheck.disable-debug-log");
+        if (disableDebugLog == false) {
+            console.log("in provideIssues");
+        }
 
         // provideIssues() seems to sometimes be called before a document is
         // ready to read. Bail out early if so.
         const docLen = editor.document.length;
         if (docLen === 0) {
-            console.log("Bailing out early as document length is 0");
+            if (disableDebugLog == false) {
+                console.log("Bailing out early as document length is 0");
+            }
             return [];
         }
 
@@ -81,7 +86,10 @@ class IssuesProvider {
                 if (line === "") {
                     return;
                 }
-                console.log("in onStdout with line: '" + line + "'");
+
+                if (disableDebugLog == false) {
+                    console.log("in onStdout with line: '" + line + "'");
+                }
 
                 const matches = line.match(lineMatchPattern);
                 if (matches === null) {
@@ -139,7 +147,11 @@ class IssuesProvider {
                 // Get text
                 const fullRange = new Range(0, docLen);
                 const text = editor.document.getTextInRange(fullRange);
-                console.log("in writer.ready callback; doc length: " + text.length);
+
+                if (disableDebugLog == false) {
+                    console.log("in writer.ready callback; doc length: " + text.length);
+                }
+
                 writer.write(text);
                 writer.close();
             });
