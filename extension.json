@@ -3,7 +3,7 @@
     "name": "Luacheck",
     "organization": "Garrett Albright",
     "description": "Integrates the Luacheck linter for Lua into Nova.",
-    "version": "0.2.0",
+    "version": "0.3.1",
     "categories": ["issues"],
 
     "main": "main.js",
